@@ -10,6 +10,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
+from kivy.base import runTouchApp
 
 # В переменной KV создаём вёрстку
 KV = """
@@ -21,10 +22,24 @@ MyBL:
         spacing: 10
         
         TextInput:
-                text: root.placeholder
-                foreground_color:  root.text_secondary
+                id: txt_input_data
+                text:root.placeholder 
+                multiline: False
+                cursor_color: root.text_secondary_color
+                font_family: 'Roboto'
+                font_size: '20sp'
+                size_hint: 1, None
+                #height: '100dp'
+                on_focus: self.text = "" if self.text==root.placeholder else self.text #Очищаем поле ввода если в него переведён фокус                        
+                #on_text: root.label_change(self.text) #Передаём введенные данные в Label обуквенно
+                on_text_validate: 
+                        text_holder = self.text #Для понимания синтаксиса работы нескольких функций по событию.Их нужно располагать одну под другой 
+                        root.label_change(self.text) #Передаём введенные данные в Label после нажатия Enter 
                 #width: 300
-        
+                foreground_color: root.text_secondary_color if self.text==root.placeholder else root.text_primary_color
+                #background_normal: './assets/imgs/transparent.png'
+                #background_active: './assets/imgs/transparent.png'    
+    
         Label: #вывод
                 font_size:"30sp"
                 text:root.data_label
@@ -35,6 +50,8 @@ MyBL:
                 background_color:'#9932CC'
                 size_hint: (1,0.5)
                 on_press: root.label_change(root.button1_text)
+                 #       print("root.placeholder = ", root.placeholder)
+                 #      root.callback_txt_input_data(root.placeholder)
                 elevation_normal: 8  # длинна тени 
                 radius: [20]
                 
@@ -60,7 +77,7 @@ MyBL:
                 on_press: root.label_change(root.button4_text)
                 radius: [50,]
                 # border: 30,30,30,30
-                
+                        
 """
 
 
@@ -69,7 +86,7 @@ class MyBL(BoxLayout):
     # в переменных окружения формируем всё окружение
     placeholder = "Введите текст:\n"
     text_secondary_color = (0, 0, 0, 0.5)
-    text_primary_color = (0, 0, 0, 0.5)
+    text_primary_color = (0, 0, 0, 1)
     button1_text = "поиск по названию 1"
     button2_text = "поиск по названию 2"
     button3_text = "поиск по названию 3"
@@ -77,7 +94,9 @@ class MyBL(BoxLayout):
 
     def label_change(self, new_text):
         self.data_label = new_text
-        print(new_text)
+
+    def callback_txt_input_data(self, text):
+        self.ids.txt_input_data.text = text
 
     def callback(self):
         print("poisk")
