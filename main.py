@@ -1,4 +1,3 @@
-
 __version__ = '1.0.3'
 
 import kivy as kivy
@@ -20,51 +19,61 @@ MyBL:
         pos_hint: {"center_x": 0.5, "center_y":0.5}
         padding: 10
         spacing: 10
-                
+        
+        TextInput:
+                text: root.placeholder
+                foreground_color:  root.text_secondary
+                #width: 300
+        
         Label: #вывод
                 font_size:"30sp"
                 text:root.data_label
                 
         Button:
-                text: "поиск по названию 1"
+                text: root.button1_text
                 bold: True
                 background_color:'#9932CC'
                 size_hint: (1,0.5)
-                on_press: root.label_change("поиск по названию 1")
-                line_width: 2
+                on_press: root.label_change(root.button1_text)
                 elevation_normal: 8  # длинна тени 
                 radius: [20]
                 
         Button:
-                text: "поиск по названию 2"
+                text: root.button2_text
                 bold: True
                 background_color:'#9932CC'
                 size_hint: (1,0.5)
-                on_press: root.label_change("поиск по названию 2")
+                on_press: root.label_change(root.button2_text)
                 line_width: 2
         Button:
-                text: "поиск по названию 3"
+                text: root.button3_text
                 bold: True
                 background_color:'#9932CC'
                 size_hint: (1,0.5)
-                on_press: root.label_change("поиск по названию 3")
-                line_width: 2
+                on_press: root.label_change(root.button3_text)
                 
         Button:
-                text: "поиск по названию 4"
+                text: root.button4_text
                 bold: True
                 background_color:'#9932CC'
                 size_hint: (1,0.5)
-                on_press: root.label_change("поиск по названию 4")
+                on_press: root.label_change(root.button4_text)
                 radius: [50,]
                 # border: 30,30,30,30
-                
                 
 """
 
 
 class MyBL(BoxLayout):
     data_label = StringProperty("Приветствую!")
+    # в переменных окружения формируем всё окружение
+    placeholder = "Введите текст:\n"
+    text_secondary_color = (0, 0, 0, 0.5)
+    text_primary_color = (0, 0, 0, 0.5)
+    button1_text = "поиск по названию 1"
+    button2_text = "поиск по названию 2"
+    button3_text = "поиск по названию 3"
+    button4_text = "поиск по названию 4"
 
     def label_change(self, new_text):
         self.data_label = new_text
