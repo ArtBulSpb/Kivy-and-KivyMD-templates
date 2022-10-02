@@ -24,16 +24,21 @@ MyBL:
         pos_hint: {"center_x": 0.5, "center_y":0.5}
         padding: 10
         spacing: 10
+        
         BoxLayout:
+                orientation: "horizontal"
+                pos_hint: {"center_x": 0.5, "center_y":0.5}
                 MDTextField:
                         id: text_field_md
                         theme_text_color: "Custom"
                         text_color: root.text_primary_color 
                         hint_text: root.placeholder
-                        helper_text: None
+                        size_hint_x:None
+                        width: 400
+                        #pos_hint: {"center_x": 0.5, "center_y": 0.5}
                         color: root.text_primary_color 
                         cursor_color: root.text_secondary_color
-                        height: "30dp"
+                        height: "60dp"
                         font_family: 'Roboto'
                         # font_size: '20sp'
                         mode: "round"
@@ -48,13 +53,15 @@ MyBL:
                                 root.label_change(self.text) #Передаём введенные данные в Label после нажатия Enter 
                         foreground_color: root.text_secondary_color if self.text==root.placeholder else root.text_primary_color
                         
-                        MDFillRoundFlatButton:
-                                text:"X"
-                                line_color: 0, 0, 0, 0.3
-                                md_bg_color : 153/255, 50/255, 204/255, 1
-                                pos_hint: {"center_x": .95, "center_y": .5} #Параметры в {} определяют центр кнопки
-                                on_press: root.callback_txt_input_data("")
-        
+                MDFillRoundFlatButton:
+                        text:"X"
+                        line_color: 0, 0, 0, 0.3
+                        md_bg_color : 153/255, 50/255, 204/255, 1
+                        #pos_hint: {"center_x": .95, "center_y": .5} #Параметры в {} определяют центр кнопки
+                        on_press: 
+                                root.callback_txt_input_data("")
+                                                                
+
         # TextInput:
         #         id: txt_input_data
         #         text:root.placeholder 
@@ -163,10 +170,11 @@ LogIn = """
 
 """
 
+
 class MyBL(BoxLayout):
     data_label = StringProperty("Приветствую!")
     # в переменных окружения формируем всё окружение
-    placeholder = "Введите текст ля поиска здесь:\n"
+    placeholder = "Введите текст для поиска здесь:\n"
     text_secondary_color = (0, 0, 0, 0.5)
     text_primary_color = (0, 0, 0, 1)
     button1_text = "поиск по названию 1"
@@ -183,9 +191,11 @@ class MyBL(BoxLayout):
         # self.ids.txt_input_data.text = text
         self.ids.text_field_md.text = text
 
-
     def callback(self):
         print("poisk")
+
+    def clear(self):
+        self.ids.text_field_md.helper_text = ""
 
 
 class MyApp(MDApp):
