@@ -14,7 +14,7 @@ from kivy.base import runTouchApp
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.button import MDRectangleFlatIconButton
-
+from kivymd.uix.label import MDLabel
 
 # В переменной KV создаём вёрстку
 KV = """
@@ -44,9 +44,12 @@ MyBL:
                 #background_normal: './assets/imgs/transparent.png'
                 #background_active: './assets/imgs/transparent.png'    
     
-        Label: #вывод
+        MDLabel: #вывод
                 font_size:"30sp"
+                #theme_text_color: [root.text_primary_color, root.text_secondary_color, '#9932CC', '#9932CC', '#9932CC', '#9932CC']
+                theme_text_color: "Secondary" #"Primary"#, "Secondary", "Hint", "Error", "ContrastParentBackground"]
                 text:root.data_label
+                halign: "center"
                 
         Button:
                 text: root.button1_text
@@ -76,17 +79,28 @@ MyBL:
         Button:
                 text: root.button4_text
                 bold: True
-                background_color:'#9932CC'
+                background_color: 153/255, 50/255, 204/255, 1
                 size_hint: (1,0.5)
                 on_press: root.label_change(root.button4_text)
-                radius: [50,]
+                radius: [10.1] #Не работает скругление кнопки. Нужно делать кастомное.
                 # border: 30,30,30,30
-                
+        
         MDFillRoundFlatButton:
-                text: "MDRectangleFlatIconButton"
+                text: root.button4_text
+                line_color: 0, 0, 0, 0.3
+                md_bg_color : 153/255, 50/255, 204/255, 1
+                pos_hint: {"center_x": .5, "center_y": .5} #Параметры в {} определяют центр кнопки
+                #size_hint: (1,0.5)
+                on_press: root.label_change(root.button4_text)
+                #radius: [10.1] #Не работает скругление кнопки. Нужно делать кастомное.
+                # border: 30,30,30,30
+        
+        MDFillRoundFlatButton:
+                text: root.button4_text
                 #icon: "language-python"
-                line_color: 0, 0, 0, 0
-                pos_hint: {"center_x": .5, "center_y": .7} #Параметры в {} определяют центр кнопки
+                line_color: 0, 0, 0, 0.3
+                pos_hint: {"center_x": .5, "center_y": .5} #Параметры в {} определяют центр кнопки
+                on_press: self.md_bg_color = '#9932CC'
             
 
 """
@@ -124,6 +138,8 @@ class MyBL(BoxLayout):
     button2_text = "поиск по названию 2"
     button3_text = "поиск по названию 3"
     button4_text = "поиск по названию 4"
+    button5_text = "поиск по названию 5"
+    button6_text = "поиск по названию 6"
 
     def label_change(self, new_text):
         self.data_label = new_text
