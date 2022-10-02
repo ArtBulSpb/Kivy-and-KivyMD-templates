@@ -33,6 +33,7 @@ MyBL:
                         theme_text_color: "Custom"
                         text_color: root.text_primary_color 
                         hint_text: root.placeholder
+                        helper_text:""# root.placeholder
                         size_hint_x:None
                         width: 400
                         #pos_hint: {"center_x": 0.5, "center_y": 0.5}
@@ -43,13 +44,14 @@ MyBL:
                         # font_size: '20sp'
                         mode: "round"
                         max_text_length: 100
-                        helper_text: root.placeholder
                         on_focus: 
                                 self.hint_text = "" if self.hint_text==root.placeholder else self.hint_text #Очищаем поле ввода если в него переведён фокус
                                 text_color_focus: root.text_primary_color                        
-                        #on_text: root.label_change(self.text) #Передаём введенные данные в Label обуквенно
+                                self.helper_text = root.placeholder
+                        on_text: 
+                                root.label_change(self.text)
+                                self.helper_text = root.placeholder #Передаём введенные данные в Label побуквенно
                         on_text_validate: 
-                                text_holder = self.hint_text #Для понимания синтаксиса работы нескольких функций по событию.Их нужно располагать одну под другой 
                                 root.label_change(self.text) #Передаём введенные данные в Label после нажатия Enter 
                         foreground_color: root.text_secondary_color if self.text==root.placeholder else root.text_primary_color
                         
@@ -59,28 +61,10 @@ MyBL:
                         md_bg_color : 153/255, 50/255, 204/255, 1
                         #pos_hint: {"center_x": .95, "center_y": .5} #Параметры в {} определяют центр кнопки
                         on_press: 
-                                root.callback_txt_input_data("")
+                                root.clear()
+                                #text_field_md.help_text: ""
+                                
                                                                 
-
-        # TextInput:
-        #         id: txt_input_data
-        #         text:root.placeholder 
-        #         multiline: False
-        #         cursor_color: root.text_secondary_color
-        #         font_family: 'Roboto'
-        #         font_size: '20sp'
-        #         size_hint: 1, None
-        #         #height: '100dp'
-        #         on_focus: self.text = "" if self.text==root.placeholder else self.text #Очищаем поле ввода если в него переведён фокус                        
-        #         #on_text: root.label_change(self.text) #Передаём введенные данные в Label обуквенно
-        #         on_text_validate: 
-        #                 text_holder = self.text #Для понимания синтаксиса работы нескольких функций по событию.Их нужно располагать одну под другой 
-        #                 root.label_change(self.text) #Передаём введенные данные в Label после нажатия Enter 
-        #         #width: 300
-        #         foreground_color: root.text_secondary_color if self.text==root.placeholder else root.text_primary_color
-        #         #background_normal: './assets/imgs/transparent.png'
-        #         #background_active: './assets/imgs/transparent.png'    
-    
         MDLabel: #вывод
                 font_size:"30sp"
                 #theme_text_color: [root.text_primary_color, root.text_secondary_color, '#9932CC', '#9932CC', '#9932CC', '#9932CC']
@@ -167,7 +151,6 @@ LogIn = """
             id: password
             password: True
 
-
 """
 
 
@@ -188,14 +171,17 @@ class MyBL(BoxLayout):
         self.data_label = new_text
 
     def callback_txt_input_data(self, text):
-        # self.ids.txt_input_data.text = text
+        self.ids.text_field_md.helper_text = self.placeholder
         self.ids.text_field_md.text = text
+        # self.ids.text_field_md.hint_text = self.placeholder
+        # print("self.ids.text_field_md.helper_text = text called")
 
     def callback(self):
         print("poisk")
 
     def clear(self):
-        self.ids.text_field_md.helper_text = ""
+        self.ids.text_field_md.hint_text = ""
+        self.callback_txt_input_data("")
 
 
 class MyApp(MDApp):
