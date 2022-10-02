@@ -48,61 +48,79 @@ MyBL:
                 font_size:"30sp"
                 #theme_text_color: [root.text_primary_color, root.text_secondary_color, '#9932CC', '#9932CC', '#9932CC', '#9932CC']
                 theme_text_color: "Secondary" #"Primary"#, "Secondary", "Hint", "Error", "ContrastParentBackground"]
+                text_color: root.text_primary_color
                 text:root.data_label
                 halign: "center"
                 
-        Button:
+        MDFillRoundFlatButton:
                 text: root.button1_text
-                bold: True
-                background_color:'#9932CC'
-                size_hint: (1,0.5)
-                on_press: root.label_change(root.button1_text)
-                 #       print("root.placeholder = ", root.placeholder)
-                 #      root.callback_txt_input_data(root.placeholder)
-                elevation_normal: 8  # длинна тени 
-                radius: [20]
+                line_color: 0, 0, 0, 0.3
+                md_bg_color : 153/255, 50/255, 204/255, 1
+                pos_hint: {"center_x": .5, "center_y": .5} #Параметры в {} определяют центр кнопки
+                #size_hint: (1,0.5)
+                on_press: 
+                        self.md_bg_color = '#9932CC'
+                        root.label_change(self.text)
+                        root.callback_txt_input_data(self.text)
                 
-        Button:
+        MDFillRoundFlatButton:
                 text: root.button2_text
-                bold: True
-                background_color:'#9932CC'
-                size_hint: (1,0.5)
-                on_press: root.label_change(root.button2_text)
-                line_width: 2
-        Button:
-                text: root.button3_text
-                bold: True
-                background_color:'#9932CC'
-                size_hint: (1,0.5)
-                on_press: root.label_change(root.button3_text)
+                line_color: 0, 0, 0, 0.3
+                md_bg_color : 153/255, 50/255, 204/255, 1
+                pos_hint: {"center_x": .5, "center_y": .5} #Параметры в {} определяют центр кнопки
+                #size_hint: (1,0.5)
+                on_press: 
+                        self.md_bg_color = '#9932CC'
+                        root.label_change(self.text)
+                        root.callback_txt_input_data(self.text)
                 
-        Button:
-                text: root.button4_text
-                bold: True
-                background_color: 153/255, 50/255, 204/255, 1
-                size_hint: (1,0.5)
-                on_press: root.label_change(root.button4_text)
-                radius: [10.1] #Не работает скругление кнопки. Нужно делать кастомное.
-                # border: 30,30,30,30
-        
+        MDFillRoundFlatButton:
+                text: root.button3_text
+                line_color: 0, 0, 0, 0.3
+                md_bg_color : 153/255, 50/255, 204/255, 1
+                pos_hint: {"center_x": .5, "center_y": .5} #Параметры в {} определяют центр кнопки
+                #size_hint: (1,0.5)
+                on_press: 
+                        self.md_bg_color = '#9932CC'
+                        root.label_change(self.text)
+                        root.callback_txt_input_data(self.text)
+                
         MDFillRoundFlatButton:
                 text: root.button4_text
                 line_color: 0, 0, 0, 0.3
                 md_bg_color : 153/255, 50/255, 204/255, 1
                 pos_hint: {"center_x": .5, "center_y": .5} #Параметры в {} определяют центр кнопки
                 #size_hint: (1,0.5)
-                on_press: root.label_change(root.button4_text)
+                on_press: 
+                        self.md_bg_color = '#9932CC'
+                        root.label_change(self.text)
+                        root.callback_txt_input_data(self.text)
+                radius: [10.1] #Не работает скругление кнопки. Нужно делать кастомное.
+                # border: 30,30,30,30
+        
+        MDFillRoundFlatButton:
+                text: root.button5_text
+                line_color: 0, 0, 0, 0.3
+                md_bg_color : 153/255, 50/255, 204/255, 1
+                pos_hint: {"center_x": .5, "center_y": .5} #Параметры в {} определяют центр кнопки
+                #size_hint: (1,0.5)
+                on_press: 
+                        self.md_bg_color = '#9932CC'
+                        root.label_change(self.text)
+                        root.callback_txt_input_data(self.text)
                 #radius: [10.1] #Не работает скругление кнопки. Нужно делать кастомное.
                 # border: 30,30,30,30
         
         MDFillRoundFlatButton:
-                text: root.button4_text
+                text: root.button6_text
                 #icon: "language-python"
                 line_color: 0, 0, 0, 0.3
                 pos_hint: {"center_x": .5, "center_y": .5} #Параметры в {} определяют центр кнопки
-                on_press: self.md_bg_color = '#9932CC'
-            
-
+                on_press: 
+                        self.md_bg_color = '#9932CC'
+                        root.label_change(self.text)
+                        root.callback_txt_input_data(self.text)
+                        
 """
 
 LogIn = """
