@@ -11,6 +11,10 @@ from kivy.properties import StringProperty
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.base import runTouchApp
+from kivymd.app import MDApp
+from kivymd.uix.screen import MDScreen
+from kivymd.uix.button import MDRectangleFlatIconButton
+
 
 # В переменной KV создаём вёрстку
 KV = """
@@ -77,9 +81,38 @@ MyBL:
                 on_press: root.label_change(root.button4_text)
                 radius: [50,]
                 # border: 30,30,30,30
-                        
+                
+        MDFillRoundFlatButton:
+                text: "MDRectangleFlatIconButton"
+                #icon: "language-python"
+                line_color: 0, 0, 0, 0
+                pos_hint: {"center_x": .5, "center_y": .7} #Параметры в {} определяют центр кнопки
+            
+
 """
 
+LogIn = """
+
+<LoginScreen>:
+    f_username: username
+    f_password: password
+    GridLayout:
+        rows: 2
+        cols: 2
+        padding: 10
+        spacing: 10
+        Label:
+            text: "User Name"
+        TextInput:
+            id: username
+        Label:
+            text: "Password"
+        TextInput:
+            id: password
+            password: True
+
+
+"""
 
 class MyBL(BoxLayout):
     data_label = StringProperty("Приветствую!")
@@ -102,7 +135,7 @@ class MyBL(BoxLayout):
         print("poisk")
 
 
-class MyApp(App):
+class MyApp(MDApp):
     running = True
 
     def build(self):
